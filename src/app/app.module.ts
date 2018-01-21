@@ -7,14 +7,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
-import { UiModule } from './ui/ui.module';
-import { ContentModule } from './content/content.module';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AUTH_PROVIDERS} from 'angularfire2/auth'
+import { AngularFireDatabase } from 'angularfire2/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDg0mncwgtGjAOpYruM_yHq-Eb2pPWFNxw",
@@ -37,7 +36,7 @@ const firebaseConfig = {
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [ AngularFireDatabase ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
