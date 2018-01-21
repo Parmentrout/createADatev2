@@ -8,8 +8,8 @@
     "orientation": "portrait",
     "icons": [
         {
-            "src": "/assets/icons/android-chrome-512x512.png",
-            "sizes": "512x512",
+            "src": "/assets/glass.png",
+            "sizes": "206x245",
             "type": "image/png"
         }
     ]
