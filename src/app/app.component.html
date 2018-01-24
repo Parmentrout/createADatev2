@@ -1,4 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<!-- The content below is only a placeholder and can be replaced.
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -18,5 +18,53 @@
   </li>
 </ul>
 
-<strong>{{message}}</strong>
+<strong>{{message}}</strong> -->
+<nav class="navbar navbar-inverse bg-primary">
+  <div class="container-fluid">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Create-A-Date</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+              <li [routerLinkActive]="['link-active']">
+                  <a [routerLink]="['/home']">
+                      <span class='glyphicon glyphicon-home'></span> Home
+                  </a>
+              </li>
+              <li [routerLinkActive]="['link-active']">
+                  <a [routerLink]="['/date']">
+                      <span class='glyphicon glyphicon-glass'></span> Date Night
+                  </a>
+              </li>
+              <li [routerLinkActive]="['link-active']">
+                  <a [routerLink]="['/builder']">
+                      <span class='glyphicon glyphicon-heart'></span> Date Builder
+                  </a>
+              </li>
+              <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/my-date']">
+                    <span class='glyphicon glyphicon-heart'></span> My Date
+                </a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
 <router-outlet></router-outlet>

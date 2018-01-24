@@ -15,14 +15,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AUTH_PROVIDERS} from 'angularfire2/auth'
 import { AngularFireDatabase } from 'angularfire2/database';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDg0mncwgtGjAOpYruM_yHq-Eb2pPWFNxw",
-  authDomain: "createadate-26879.firebaseapp.com",
-  databaseURL: "https://createadate-26879.firebaseio.com",
-  projectId: "createadate-26879",
-  storageBucket: "createadate-26879.appspot.com",
-  messagingSenderId: "851098752751"
-};
+import { BuilderModule } from './builder/builder.module';
+import { DateModule } from './date/date.module';
+import { HomeModule } from './home/home.module';
+import { MyDateModule } from './my-date/my-date.module';
 
 @NgModule({
   declarations: [
@@ -31,10 +27,14 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    HomeModule,
+    DateModule,
+    MyDateModule,
+    BuilderModule
   ],
   providers: [ AngularFireDatabase ],
   bootstrap: [AppComponent]
