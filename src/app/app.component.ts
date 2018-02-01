@@ -13,7 +13,9 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
+  loginOut = 'login';
+  loggedIn = false;
+  userName: string;
   user: any;
   test: any;
   items: any;
@@ -24,15 +26,40 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.items = this.db.list('/date').valueChanges(); //Realtime observable for getting data
     this.afAuth.authState.subscribe(user => { //if null logged out, else logged in
-      this.user = JSON.stringify(user);
+      console.log('hit');
+      //console.log(user);
+      if (this.user) {
+        this.userName = user.displayName;
+        this.loginOut = 'Logout';
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
     });
   }
 
+  // logInOut() {
+  //   if (!this.loggedIn) {
+  //     this.login().then(user => {
+  //       this.loginOut = 'Logout';
+  //       this.loggedIn = true;
+  //     });
+  //   } else {
+  //     this.logout().then(() => {
+  //       this.loginOut = 'Login';
+  //       this.loggedIn = false;
+  //     });
+  //   }
+
+  //   this.loggedIn = !this.loggedIn;
+  // }
+
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
-     this.afAuth.auth.signOut();
+    console.log('logout');
+    this.afAuth.auth.signOut();
   }
 
   writeToDatabase() {
