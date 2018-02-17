@@ -7,6 +7,7 @@ import { FirstOptionComponent } from './first-option/first-option.component';
 import { SecondOptionComponent } from './second-option/second-option.component';
 import { AdditionalOptionComponent } from './additional-option/additional-option.component';
 import { WelcomeBuilderComponent } from './welcome-builder/welcome-builder.component';
+import { OptionMenuComponent } from './option-menu/option-menu.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { WelcomeBuilderComponent } from './welcome-builder/welcome-builder.compo
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeBuilderComponent},
       {path: 'start-build', component: StartBuildComponent},
+      {path: 'option-menu', component: OptionMenuComponent},
       {path: 'first-option', component: FirstOptionComponent},
       {path: 'first-option/:id', component: FirstOptionComponent},
       {path: 'second-option', component: SecondOptionComponent},
@@ -24,6 +26,6 @@ import { WelcomeBuilderComponent } from './welcome-builder/welcome-builder.compo
     ])
   ],
   declarations: [BuilderComponent, WelcomeBuilderComponent,
-    StartBuildComponent, FirstOptionComponent, SecondOptionComponent, AdditionalOptionComponent]
+    StartBuildComponent, FirstOptionComponent, SecondOptionComponent, AdditionalOptionComponent, OptionMenuComponent]
 })
 export class BuilderModule { }
