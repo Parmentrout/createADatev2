@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FirstOptionComponent } from './first-option.component';
+import { DateSummaryComponent } from './date-summary.component';
 
-describe('FirstOptionComponent', () => {
-  let component: FirstOptionComponent;
-  let fixture: ComponentFixture<FirstOptionComponent>;
+describe('DateSummaryComponent', () => {
+  let component: DateSummaryComponent;
+  let fixture: ComponentFixture<DateSummaryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FirstOptionComponent ]
+      declarations: [ DateSummaryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FirstOptionComponent);
+    fixture = TestBed.createComponent(DateSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

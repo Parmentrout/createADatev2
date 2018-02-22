@@ -1,21 +1,24 @@
 <div class="row gimme-space-top mx-auto">
- <div class="mx-auto col-sm-6">
+ <div class="mx-auto col-md-8 col-xs-12">
     <div class="card text-white bg-secondary">
-      <div class="card-header">Option 1</div>
+      <div class="card-header">Option {{optionNumber}}</div>
       <div class="card-body">
           <h4 class="card-title">Now it's time to set your options. The first thing you'll set is what is displayed to your date.</h4>
           <p class="card-text">For example, if Part 1 of your date is dinner you can display "Fancy" or "Not Fancy". If in Part 1 you are going to a park or to a museum you can display "Inside" or "Outside".</p>
           <form>
               <div class="form-group">
-                  <label for="nameOfDate">Option 1 Display Name:</label>
-                  <input type="text" class="form-control" id="nameOfDate" aria-describedby="date" placeholder="Option">
+                  <label for="nameOfDate">Option {{optionNumber}} Display Name:</label>
+                  <input type="text" class="form-control" id="nameOfDate" aria-describedby="date" placeholder="Fancy">
                 </div>
               <div class="form-group">
                   <label for="nameOfDate">Location:</label>
-                  <input type="text" class="form-control" id="nameOfDate" aria-describedby="date" placeholder="Option">
+                  <input type="text" id="nameOfDate" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search [(formControl)]="searchControl" aria-describedby="date">
                 </div>
           </form>
-        <a class="btn btn-lg btn-block btn-default" href="/build/option-menu">Save Option 1</a>
+          <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+          </agm-map>
+        <a class="btn btn-lg btn-block btn-default" (click)="saveForm()">Save Option {{optionNumber}}</a>
       </div>
     </div>
   </div> 

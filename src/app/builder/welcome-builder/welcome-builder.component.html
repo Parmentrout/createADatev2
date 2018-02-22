@@ -4,7 +4,9 @@
   <p>Let's get going! Build a new date by clicking below, or edit an existing date <a>here</a> 
   </p>
   <p class="lead">
-  <a class="btn btn-primary btn-lg" href="/build/start-build" role="button">Build New Date</a>  </p>
+  <a class="btn btn-primary btn-lg" [attr.disabled]="!loggedIn" href="/build/start-build" role="button">Build New Date</a>  
+  <span *ngIf="!loggedIn">You must <a (click)="login()">Login</a> to build a date!</span>
+</p>
 </div>
 <div class="col-12">
     <h5>Need some inspiration?  Check out one of our sample dates below to see what you can build.</h5>

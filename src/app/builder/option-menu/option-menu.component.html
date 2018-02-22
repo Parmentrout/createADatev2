@@ -1,6 +1,6 @@
 <div class="row gimme-space-top mx-auto">
   <div class="col-12">
-      <h3 align="center">Date Night <!--I want this to be what they named it in the first screen--> Part 1</h3>
+      <h3 align="center">Date Night <!--I want this to be what they named it in the first screen--> Part {{dateNumber}}</h3>
   </div>
 </div>
   <div class="row gimme-space-top">
@@ -8,7 +8,7 @@
           <div class="card text-white bg-info">
             <div class="card-header">Option 1</div>
             <div class="card-body">
-              <a class="btn btn-lg btn-block btn-default" href="/build/first-option">Click Here to Set Option 1</a>
+              <a class="btn btn-lg btn-block btn-secondary" href="/build/option/1">Click Here to Set Option 1</a>
             </div>
           </div>
       </div>
@@ -16,8 +16,13 @@
       <div class="card text-white bg-info">
         <div class="card-header">Option 2</div>
         <div class="card-body">
-          <a class="btn btn-lg btn-block btn-default" href="/build/second-option" >Click Here to Set Option 2</a>
+          <a class="btn btn-lg btn-block btn-secondary" href="/build/option/2" >Click Here to Set Option 2</a>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row gimme-space-top">
+    <div class="col-11">
+      <a class="btn btn-lg btn-secondary float-right" (click)="bumpDateAndSave()">{{continueText}}</a>
     </div>
   </div>

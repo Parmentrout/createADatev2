@@ -5,16 +5,16 @@
       <div class="card-body">
         <h4 class="card-title">First things first. What would you like to call this date?</h4>
         <p class="card-text">It can be anything from "A Night Out in Denver" to "Frolicing with Unicorns".  The world is your oyster!</p>
-        <form>
+        <form #dateForm>
             <div class="form-group">
             <!--    <label for="nameOfDate">Date Name:</label> -->
-                <input type="text" class="form-control" id="nameOfDate" aria-describedby="date" placeholder="My Date">
+                <input type="text" [(ngModel)]="model" name="dateName" #dateName required class="form-control" id="nameOfDate" aria-describedby="date" placeholder="My Date">
              <!--   <small id="emailHelp" class="form-text text-muted">Extra text here?</small>-->
               </div>
         </form>
       </div>
       <div class="card-footer">
-        <a class="btn btn-primary btn-block btn-lg pull-right" href="/build/option-menu" role="button">Continue to Part 1</a>
+        <a class="btn btn-primary btn-block btn-lg pull-right" [attr.disabled]="!dateForm.isValid" (click)="save()" role="button">Continue to Part 1</a>
       </div>
     </div>
   </div>
