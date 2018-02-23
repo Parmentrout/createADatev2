@@ -5,18 +5,31 @@
       <div class="card-body">
         <h4 class="card-title">First things first. What would you like to call this date?</h4>
         <p class="card-text">It can be anything from "A Night Out in Denver" to "Frolicing with Unicorns".  The world is your oyster!</p>
-        <form #dateForm>
+        <form #dateForm="ngForm">
             <div class="form-group">
-            <!--    <label for="nameOfDate">Date Name:</label> -->
-                <input type="text" [(ngModel)]="model" name="dateName" #dateName required class="form-control" id="nameOfDate" aria-describedby="date" placeholder="My Date">
+               <label for="nameOfDate">Date Name</label>
+                <input type="text" required [(ngModel)]="model.dateName" name="dateName" #dateName class="form-control" id="nameOfDate" aria-describedby="date" placeholder="My Date">
              <!--   <small id="emailHelp" class="form-text text-muted">Extra text here?</small>-->
+              </div>
+              <div class="form-group">
+                   <label for="dateDesc">Description <small><i>(Optional)</i></small></label>
+                    <input type="text" [(ngModel)]="model.description" name="dateDesc" #dateDesc class="form-control" id="dateDesc" aria-describedby="date description" placeholder="Description">
+                 <!--   <small id="emailHelp" class="form-text text-muted">Extra text here?</small>-->
               </div>
         </form>
       </div>
       <div class="card-footer">
-        <a class="btn btn-primary btn-block btn-lg pull-right" [attr.disabled]="!dateForm.isValid" (click)="save()" role="button">Continue to Part 1</a>
+        <button type="submit" class="btn btn-primary btn-block btn-lg pull-right" [disabled]="!dateForm.form.valid || formSaving" (click)="save()" role="button">
+          <span *ngIf="!formSaving">Continue to Part 1</span>
+          <span class="fa fa-refresh fa-spin" *ngIf="formSaving"></span>
+        </button>
       </div>
     </div>
+  </div>
+</div>
+<div class="row gimme-space-top">
+  <div class="col-12">
+    <p *ngIf="errorMessages">{{errorMessages}}</p>
   </div>
 </div>
 

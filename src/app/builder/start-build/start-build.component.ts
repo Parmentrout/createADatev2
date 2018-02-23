@@ -11,12 +11,16 @@ import { firestore } from 'firebase';
   styleUrls: ['./start-build.component.css']
 })
 export class StartBuildComponent implements OnInit {
-  model: string = '';
+  model: MyDate = new MyDate();
   userId: string;
+  errorMessages: string;
+  formSaving: boolean = false;
 
   constructor(private builderService: BuilderService, private router: Router, private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
+    this.model.dateName = '';
+    this.model.description = '';
     this.afAuth.authState.subscribe(user => { //if null logged out, else logged in
       if (user) {
         this.userId = user.uid;
@@ -27,7 +31,17 @@ export class StartBuildComponent implements OnInit {
   }
 
   save() {
-    this.builderService.startDate(this.model, this.userId);
+    this.formSaving = true;
+    let newDate = this.builderService.startDate(this.model.dateName, this.model.description, this.userId);
+    this.builderService.saveDate().take(1)
+      .subscribe(result => {
+        this.formSaving = false;
+        if (result) {
+          this.router.navigate([`/build/option-menu/${newDate.dateId}`]);
+        } else {
+          this.errorMessages = 'Whoops!  Something went wrong, come back later to try again!';
+        }
+      });
   }
 
 }

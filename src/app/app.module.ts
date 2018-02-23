@@ -19,6 +19,7 @@ import { BuilderModule } from './builder/builder.module';
 import { DateModule } from './date/date.module';
 import { HomeModule } from './home/home.module';
 import { MyDateModule } from './my-date/my-date.module';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { MyDateModule } from './my-date/my-date.module';
     MyDateModule,
     BuilderModule
   ],
-  providers: [ AngularFireDatabase ],
+  providers: [ AngularFireDatabase, UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

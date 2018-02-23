@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 
 @Component({
@@ -11,7 +12,7 @@ export class WelcomeBuilderComponent implements OnInit {
 
   loggedIn: boolean;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private _router: Router) {
   }
 
   ngOnInit() {
@@ -26,6 +27,10 @@ export class WelcomeBuilderComponent implements OnInit {
 
   login() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+ }
+
+ startBuild() {
+    this._router.navigate(['/build/start-build']);
  }
 
 }

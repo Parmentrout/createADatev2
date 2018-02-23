@@ -26,7 +26,7 @@ import { BuilderService } from './builder.service';
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeBuilderComponent},
       {path: 'start-build', component: StartBuildComponent},
-      {path: 'option-menu', component: OptionMenuComponent},
+      {path: 'option-menu/:id', component: OptionMenuComponent},
       {path: 'option', component: FirstOptionComponent},
       {path: 'option/:optionId', component: FirstOptionComponent},
       {path: 'date-summary', component: DateSummaryComponent},

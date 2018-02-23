@@ -1,5 +1,6 @@
 export class MyDate {
     dateName: string;
+    description: string;
     userId: string;
     dateId: number;
 
