@@ -24,9 +24,17 @@ export class BuilderService {
 
     public addDateOption() {
         let dateOption = new DateOption();
-        dateOption.option1 = new DateCard();
-        dateOption.option2 = new DateCard();
+        dateOption.optionNumber = 1;
         this.currentDate.dateOptions.push(dateOption);
+
+        let dateOption2 = new DateOption();
+        dateOption2.optionNumber = 2;
+        this.currentDate.dateOptions.push(dateOption2);
+
+        let dateOption3 = new DateOption();
+        dateOption3.optionNumber = 3;
+        this.currentDate.dateOptions.push(dateOption3);
+
     }
 
     public saveDate(date: MyDate = null): Subject<boolean> {

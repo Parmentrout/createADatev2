@@ -28,7 +28,7 @@ import { BuilderService } from './builder.service';
       {path: 'start-build', component: StartBuildComponent},
       {path: 'option-menu/:id', component: OptionMenuComponent},
       {path: 'option', component: FirstOptionComponent},
-      {path: 'option/:optionId', component: FirstOptionComponent},
+      {path: 'option/:dateId/:optionId', component: FirstOptionComponent},
       {path: 'date-summary', component: DateSummaryComponent},
       {path: 'additional-option', component: AdditionalOptionComponent},
       {path: 'additional-option/:id', component: AdditionalOptionComponent}
