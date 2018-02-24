@@ -1,24 +1,24 @@
 <div class="row gimme-space-top mx-auto">
  <div class="mx-auto col-md-8 col-xs-12">
     <div class="card text-white bg-secondary">
-      <div class="card-header">Option {{optionNumber}}</div>
+      <div class="card-header">Option {{cardNumber}}</div>
       <div class="card-body">
           <h4 class="card-title">Now it's time to set your options. The first thing you'll set is what is displayed to your date.</h4>
           <p class="card-text">For example, if Part 1 of your date is dinner you can display "Fancy" or "Not Fancy". If in Part 1 you are going to a park or to a museum you can display "Inside" or "Outside".</p>
           <form>
               <div class="form-group">
-                  <label for="nameOfDate">Option {{optionNumber}} Display Name:</label>
-                  <input type="text" class="form-control" id="nameOfDate" aria-describedby="date" placeholder="Fancy">
+                  <label for="dateName">Option {{cardNumber}} Display Name:</label>
+                  <input type="text" required name="dateName" #dateName class="form-control" id="dateName" aria-describedby="date" placeholder="Fancy" [(formControl)]="searchControl">
                 </div>
               <div class="form-group">
                   <label for="nameOfDate">Location:</label>
-                  <input type="text" id="nameOfDate" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search [(formControl)]="searchControl" aria-describedby="date">
+                  <input type="text" required id="nameOfDate" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search [(formControl)]="searchControl" aria-describedby="date">
                 </div>
           </form>
           <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
               <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
           </agm-map>
-        <a class="btn btn-lg btn-block btn-default" (click)="saveForm()">Save Option {{optionNumber}}</a>
+        <button class="btn btn-lg btn-block btn-default" type="submit" [disabled]="!searchControl.valid || !placeSelected" (click)="saveForm()">Save Option {{optionNumber}}</button>
       </div>
     </div>
   </div> 

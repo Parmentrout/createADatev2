@@ -1,15 +1,25 @@
 {
-    "short_name": "CR-DT",
-    "name": "CreateADate",
+    "short_name": "Create A Date",
+    "name": "Create A Date",
     "start_url": "/",
     "theme_color": "#f48c5b",
-    "background_color": "#ffffff",
+    "background_color": "#ffc0cb",
     "display": "standalone",
     "orientation": "portrait",
     "icons": [
         {
-            "src": "/assets/glass.png",
-            "sizes": "206x245",
+            "src": "/assets/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+		{
+            "src": "/assets/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+		{
+            "src": "/assets/icon-512x512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]

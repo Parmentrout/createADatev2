@@ -28,14 +28,14 @@ export class DateOption implements IDateOption {
     option2: DateCard;
 }
 
-export class IDateCard {
+export interface IDateCard {
     label: string;
     name: string;
     address: string;
     placesInfo: any;
 }
 
-export class DateCard {
+export class DateCard implements IDateCard {
     label: string;
     name: string;
     address: string;
