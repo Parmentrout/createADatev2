@@ -5,7 +5,7 @@ import { MapsAPILoader } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { MyDate } from '../../models/date.model';
+import { MyDate, DateCard } from '../../models/date.model';
 import { BuilderService } from '../builder.service';
 
 @Component({
@@ -27,8 +27,13 @@ export class FirstOptionComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
   
-  private date: MyDate;
+  public formSaving: boolean = false;
+  public errorMessages: string = '';
+
+  private date: MyDate = new MyDate();
   private place: google.maps.places.PlaceResult;
+  public cardLabel: string = '';
+  public isCreatePage: boolean = true;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -41,6 +46,8 @@ export class FirstOptionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.searchControl = new FormControl();
+
     this._activateRoute.paramMap
     .subscribe(paramMap => {
       let dateId = paramMap.get('dateId');
@@ -52,24 +59,53 @@ export class FirstOptionComponent implements OnInit {
           .subscribe(date => {
             let dateConvert = date.payload.toJSON().toString();
             this.date = JSON.parse(dateConvert);
+
+            let option = this.date.dateOptions[parseInt(this.optionNumber) - 1];
+            let card = parseInt(this.cardNumber);
+            if (card === 1) { 
+              if (option.option1 && option.option1.label && option.option1.label !== '') {
+                this.cardLabel = option.option1.label;
+                this.isCreatePage = false;
+              }
+
+              if (option.option1 && option.option1.placesInfo) {
+                this.searchControl.setValue(`${option.option1.placesInfo.name},${option.option1.placesInfo.formatted_address}`);
+                this.place = option.option1.placesInfo;
+                this.latitude = option.option1.latitude;
+                this.longitude = option.option1.longitude;
+                this.placeSelected = true;
+              }
+            } else if (card === 2) {
+              if (option.option2 && option.option2.label && option.option2.label !== '') {
+                this.cardLabel = option.option2.label;
+                this.isCreatePage = false;
+              }
+
+              if (option.option2 && option.option2.placesInfo) {
+                this.searchControl.setValue(`${option.option2.placesInfo.name},${option.option2.placesInfo.formatted_address}`);
+                this.place = option.option2.placesInfo;
+                this.latitude = option.option2.latitude;
+                this.longitude = option.option2.longitude;
+                this.placeSelected = true;
+              }
+            }
+
+            this.zoom = 12;
+
           });
       });
     });
 
-    this._activateRoute.paramMap.subscribe(params => {
-      this.optionNumber = params.get('optionId');
-      console.log(this.optionNumber);
-    });
     //set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-
     //create search FormControl
-    this.searchControl = new FormControl();
     //this.searchControl.setValue('Snooze, an A.M. Eatery, West 104th Avenue, Westminster, CO, USA');
     //set current position
-    this.setCurrentPosition();
+    if (this.isCreatePage) {
+      this.setCurrentPosition();
+    }
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -110,17 +146,39 @@ export class FirstOptionComponent implements OnInit {
     // What to save
     // Name, address, hours, website, id, url
     //console.log(this.searchControl);
-
-    let name = this.searchControl.get('dateName').value;
     let place = this.place;
 
-    let option = this.date.dateOptions[parseInt(this.optionNumber)];
+    let option = this.date.dateOptions[parseInt(this.optionNumber) - 1];
     let card = parseInt(this.cardNumber);
     if (card === 1) {
-      option.option1.name = name;
-      option.option1.label = name;
+      option.option1 = new DateCard();
+      option.option1.name = place.name;
+      option.option1.label = this.cardLabel;
       option.option1.address = place.formatted_address;
-    }
-  }
+      option.option1.latitude = place.geometry.location.lat();
+      option.option1.longitude = place.geometry.location.lng();
 
+      option.option1.placesInfo = place;
+    } else if (card === 2) {
+      option.option2 = new DateCard();
+      option.option2.name = place.name;
+      option.option2.label = this.cardLabel;
+      option.option2.address = place.formatted_address;
+      option.option2.latitude = place.geometry.location.lat();
+      option.option2.longitude = place.geometry.location.lng();
+
+      option.option2.placesInfo = place;
+    } else { 
+      return;
+    }
+
+    this.builderService.saveDate(this.date).subscribe(result => {
+      this.formSaving = false;
+        if (result) {
+          this._router.navigate([`/build/option-menu/${this.date.dateId}`]);
+        } else {
+          this.errorMessages = 'Whoops!  Something went wrong, come back later to try again!';
+        }
+    });
+  }
 }

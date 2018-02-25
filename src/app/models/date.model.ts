@@ -32,12 +32,16 @@ export interface IDateCard {
     label: string;
     name: string;
     address: string;
-    placesInfo: any;
+    latitude: number;
+    longitude: number;
+    placesInfo: google.maps.places.PlaceResult;
 }
 
 export class DateCard implements IDateCard {
     label: string;
     name: string;
     address: string;
-    placesInfo: any;
+    latitude: number;
+    longitude: number;
+    placesInfo: google.maps.places.PlaceResult;
 }

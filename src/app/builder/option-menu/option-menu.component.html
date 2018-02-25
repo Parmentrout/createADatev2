@@ -7,17 +7,17 @@
   <div class="row small-margins gimme-space-top">
       <div class="mx-auto col-md-4">
           <div class="card mt-2 mb-2 text-white bg-info">
-            <div class="card-header">Option 1</div>
+            <div class="card-header" [innerHtml]="part.option1?.name || 'Option 1'"></div>
             <div class="card-body">
-              <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/1">Click Here to Set Option 1</a>
+              <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/1" [innerHtml]="part.option1?.label || 'Set Option 1'"></a>
             </div>
           </div>
       </div>
     <div class="mx-auto col-md-4">
       <div class="card mt-2 mb-2 text-white bg-info">
-        <div class="card-header">Option 2</div>
+        <div class="card-header" [innerHtml]="part.option2?.name || 'Option 2'"></div>
         <div class="card-body">
-          <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/2" >Click Here to Set Option 2</a>
+          <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/2" [innerHtml]="part.option2?.label || 'Set Option 2'" ></a>
         </div>
       </div>
     </div>

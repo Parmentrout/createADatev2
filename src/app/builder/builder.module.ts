@@ -29,7 +29,7 @@ import { BuilderService } from './builder.service';
       {path: 'option-menu/:id', component: OptionMenuComponent},
       {path: 'option', component: FirstOptionComponent},
       {path: 'option/:optionId', component: FirstOptionComponent},
-      {path: 'option/:dateId/:optionId:/:cardId', component: FirstOptionComponent},
+      {path: 'option/:dateId/:optionId/:cardId', component: FirstOptionComponent},
       {path: 'date-summary', component: DateSummaryComponent},
       {path: 'additional-option', component: AdditionalOptionComponent},
       {path: 'additional-option/:id', component: AdditionalOptionComponent}
