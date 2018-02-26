@@ -26,11 +26,12 @@ import { BuilderService } from './builder.service';
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: 'welcome', component: WelcomeBuilderComponent},
       {path: 'start-build', component: StartBuildComponent},
+      {path: 'start-build/:id', component: StartBuildComponent},
       {path: 'option-menu/:id', component: OptionMenuComponent},
       {path: 'option', component: FirstOptionComponent},
       {path: 'option/:optionId', component: FirstOptionComponent},
       {path: 'option/:dateId/:optionId/:cardId', component: FirstOptionComponent},
-      {path: 'date-summary', component: DateSummaryComponent},
+      {path: 'date-summary/:id', component: DateSummaryComponent},
       {path: 'additional-option', component: AdditionalOptionComponent},
       {path: 'additional-option/:id', component: AdditionalOptionComponent}
     ])

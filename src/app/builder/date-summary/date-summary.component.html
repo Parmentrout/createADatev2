@@ -1,21 +1,39 @@
 <div class="row gimme-space-top">
   <div class="mx-auto col-sm-4">
-    <h3>Your Date Is Finished!</h3>
-  </div>
-</div>
-<div class="row gimme-space-top">
-  <div class="col-sm-4 mx-auto">
-    <a class="btn btn-secondary btn-lg" href="/my-date">Go on My Date</a>
-  </div>
-</div>
-<div class="row gimme-space-top">
-  <div class="col-sm-4 mx-auto">
-      <h5>Want to Share your date?</h5>
-      <ul>
-        <li><a>Send me an email</a></li>
-        <li><a>Share to facebook</a></li>
-        <li><a>Share to twitter</a></li>
-      </ul>
+    <h2>Your Date Is Ready!</h2>
   </div>
 </div>
 
+<div class="row gimme-space-top mx-auto">
+  <div class="mx-auto col-sm-6">
+      <h4>{{date.dateName}}</h4>
+      <div>{{date.description}}</div>
+  </div>
+  <div class="col-sm-6 mx-auto">
+    <h5>Want to Share your date?</h5>
+    <ul>
+      <li><a>Send me an email</a></li>
+      <li><a>Share to facebook</a></li>
+      <li><a>Share to twitter</a></li>
+    </ul>
+</div>
+</div>
+<div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
+    <div class="row small-margins gimme-space-top">
+        <div class="col-sm-3">
+            <div class="card mt-2 mb-2 text-white bg-info">
+              <div class="card-body" [innerHtml]="part.option1?.label"></div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+        <div class="card mt-2 mb-2 text-white bg-info">
+          <div class="card-body" [innerHtml]="part.option2?.label"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row gimme-space-top">
+  <div class="col-sm-12 float-right">
+    <a class="btn btn-secondary btn-lg" href="/start-build/{{date.dateId}}">Go on My Date</a>
+  </div>
+</div>

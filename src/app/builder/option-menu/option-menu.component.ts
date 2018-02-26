@@ -44,12 +44,11 @@ export class OptionMenuComponent implements OnInit {
   }
 
   bumpDateAndSave() {
-      this.router.navigateByUrl('/build/date-summary');
+      this.router.navigateByUrl(`/build/date-summary/${this.date.dateId}`);
   }
 
   private setDate(date: any) {
     this.date = JSON.parse(date);
-    console.log(date.dateOptions);
   }
 
 }
