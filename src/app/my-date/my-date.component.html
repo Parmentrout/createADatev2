@@ -1,10 +1,18 @@
-<div class="row gimme-space-top" *ngIf="!loggedIn">
-  <div class="col-12 mx-auto">
-      You must <a (click)="login()"><u>Login</u></a> to build a date!
+<div class="container">
+  <div class="row gimme-space-top" *ngIf="!loggedIn">
+    <div class="col-12 mx-auto">
+        You must <a (click)="login()"><u>Login</u></a> to build a date!
+    </div>
   </div>
-</div> 
-<div *ngFor="let item of dates | async" class="row gimme-space-top">
-  <div class="col-12 mx-auto">
-      <div>{{item.dateName}}</div>
+  <h3 align="center" *ngIf="noDates">Create some dates <span><a href="/build">here</a></span> to get started!</h3> 
+  <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
+    <div class="col-12 mx-auto">
+      <div class="date-options">
+          <h4>{{item.dateName}}</h4>
+          <p>{{item.description}}</p>
+          <div><span><a href="/date">Go On Date</a> | <a href="/build/start-build/{{item.dateId}}">Edit Date</a> | <a class="date-link" (click)="deleteDate(item.dateId)">Delete Date</a></span></div>
+          <hr>
+      </div>
+    </div>
   </div>
 </div>

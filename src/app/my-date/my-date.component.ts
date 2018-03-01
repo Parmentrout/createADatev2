@@ -13,7 +13,10 @@ import { Observable } from 'rxjs';
 export class MyDateComponent implements OnInit {
 
   dates: MyDate[] = new Array<MyDate>();
+  dates$: Observable<any>;
   loggedIn: boolean = false;
+  user: any;
+  noDates: boolean = true;
 
   constructor(
     private _userService: UserService,
@@ -21,21 +24,33 @@ export class MyDateComponent implements OnInit {
     private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
+    
 
-    this.afAuth.authState.subscribe(user => {
+    this.dates$ = this.afAuth.authState.switchMap(user => {
       if (user) {
+        this.user = user;
         this.loggedIn = true;
-        this.db.list(`dates/${user.uid}`).valueChanges().map(dates => {
-          let converts: MyDate[] = new Array<MyDate>();
+        return this.db.list(`dates/${user.uid}`).snapshotChanges().map(dates => {
+          if (dates && dates.length > 0) {
+            this.noDates = false;
+          }
+
+          let converts = new Array<MyDate>();
           for (let date of dates) {
-            converts.push(date as IMyDate);
+            let dateConvert = date.payload.toJSON().toString();
+            converts.push(JSON.parse(dateConvert));
           }
           return converts;
         });
       } else {
         this.loggedIn = false;
+        return Observable.of(new Array<MyDate>());
       }
     });
-  
+  }
+
+  deleteDate(dateId: number) {
+    let dateRecord = this.db.object(`dates/${this.user.uid}/${dateId}`);
+    dateRecord.remove().then(() => {}).catch(() => alert('Error!'));
   }
 }
