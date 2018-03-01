@@ -4,7 +4,7 @@
         You must <a (click)="login()"><u>Login</u></a> to build a date!
     </div>
   </div>
-  <h3 align="center" *ngIf="noDates">Create some dates <span><a href="/build">here</a></span> to get started!</h3> 
+  <h3 class="gimme-space-top" align="center" *ngIf="noDates">Create some dates <span><a href="/build">here</a></span> to get started!</h3> 
   <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
     <div class="col-12 mx-auto">
       <div class="date-options">

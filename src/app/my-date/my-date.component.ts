@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-my-date',
@@ -53,4 +54,8 @@ export class MyDateComponent implements OnInit {
     let dateRecord = this.db.object(`dates/${this.user.uid}/${dateId}`);
     dateRecord.remove().then(() => {}).catch(() => alert('Error!'));
   }
+
+  login() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+ }
 }
