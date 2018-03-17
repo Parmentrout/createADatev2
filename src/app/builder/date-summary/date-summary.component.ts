@@ -14,6 +14,7 @@ import { BuilderService } from '../builder.service';
 export class DateSummaryComponent implements OnInit {
 
   date: MyDate = new MyDate();
+  userId: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
     private _userService: UserService,
@@ -27,6 +28,7 @@ export class DateSummaryComponent implements OnInit {
     .map(paramMap => paramMap.get('id'))
     .subscribe(id => { 
       this.afAuth.authState.subscribe(user => {
+        this.userId = user.uid;
         this.db.object(`dates/${user.uid}/${id}`).snapshotChanges()
           .subscribe(date => {
             let dateConvert = date.payload.toJSON().toString();

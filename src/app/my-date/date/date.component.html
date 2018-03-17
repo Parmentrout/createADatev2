@@ -1,0 +1,47 @@
+<div class="container gimme-space-top">
+  <div class="row gimme-space-top" *ngIf="!isLoggedIn; else fullTemplate">
+    <div class="col-12 mx-auto">
+        You must <a (click)="login()"><u>Login</u></a> to build a date!
+    </div>
+  </div>
+  <ng-template #fullTemplate>
+    <div class="row">
+      <div class="col-12 mx-auto text-center">
+        <h3>{{date?.dateName}}</h3>
+        <div><i>{{date?.description}}</i></div>
+      </div>
+    </div>
+    <div *ngIf="!dateStarted; else dateTemplate" class="row mt-4">
+        <div class="col-12 mx-auto text-center">
+            <h6>Are you ready!?</h6>
+            <button class="btn btn-lg btn-default" (click)="startDate()">Let's Start The date!</button>
+        </div>
+    </div>
+    <ng-template #dateTemplate>
+      <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
+        <div *ngIf="part.started" class="row small-margins gimme-space-top">
+          <div class="mx-auto col-md-4">
+              <div class="card mt-2 mb-2 text-white bg-secondary">
+                <div class="card-header">
+                  <button class="btn btn-lg btn-default">{{part.option1?.label}}</button>
+                </div>
+                <div class="card-body">
+                  <!-- Meat and potatoes-->
+                </div>
+              </div>
+            </div>
+            <div class="mx-auto col-md-4">
+              <div class="card mt-2 mb-2 text-white bg-secondary">
+                <div class="card-header">
+                  <button class="btn btn-lg btn-default">{{part.option2.label}}</button>
+                </div>
+                <div class="card-body">
+                  <!-- Meat and potatoes-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
