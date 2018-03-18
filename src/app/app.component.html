@@ -39,6 +39,10 @@
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link" [routerLink]="['/my-date']">my dates</a>
         </li>
+        <li class="nav-item">
+            <a *ngIf="loggedIn" class="nav-link" (click)="login()">login</a>
+            <a *ngIf="!loggedIn" class="nav-link" (click)="logout()">logout</a>
+        </li>
       </ul>
       <!-- <ul class="navbar-nav">
         <h6 >Welcome {{userName}}!</h6>

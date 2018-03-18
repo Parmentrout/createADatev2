@@ -29,9 +29,9 @@ export class AppComponent implements OnInit{
       if (this.user) {
         this.userName = user.displayName;
         this.loginOut = 'Logout';
-        this.loggedIn = true;
-      } else {
         this.loggedIn = false;
+      } else {
+        this.loggedIn = true;
       }
     });
   }
@@ -54,10 +54,12 @@ export class AppComponent implements OnInit{
 
   login() {
      this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+     this.loggedIn = !this.loggedIn;
   }
   logout() {
     console.log('logout');
     this.afAuth.auth.signOut();
+    this.loggedIn = !this.loggedIn;
   }
 
   writeToDatabase() {
