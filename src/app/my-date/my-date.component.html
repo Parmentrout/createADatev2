@@ -10,7 +10,14 @@
       <div class="date-options">
           <h4>{{item.dateName}}</h4>
           <p>{{item.description}}</p>
-          <div><span><a href="/my-date/date/{{item.dateId}}/{{user.uid}}">Go On Date</a> | <a href="/build/start-build/{{item.dateId}}">Edit Date</a> | <a class="date-link" (click)="deleteDate(item.dateId)">Delete Date</a></span></div>
+          <div>
+            <span>
+              <a href="/my-date/date/{{item.dateId}}/{{user.uid}}">Go On Date</a> | 
+              <a href="/build/start-build/{{item.dateId}}">Edit Date</a> | 
+              <a class="date-link" (click)="resetDate(item)">Reset Date</a> |
+              <a class="date-link" (click)="deleteDate(item.dateId)">Delete Date</a>
+            </span>
+          </div>
           <hr>
       </div>
     </div>

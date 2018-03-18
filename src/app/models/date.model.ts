@@ -3,6 +3,7 @@ export interface IMyDate {
     description: string;
     userId: string;
     dateId: number;
+    isSampleDate: boolean;
 
     dateOptions: IDateOption[];
 }
@@ -12,6 +13,7 @@ export class MyDate implements IMyDate {
     description: string = '';
     userId: string = '';
     dateId: number = 0;
+    isSampleDate: boolean = false;
 
     dateOptions: IDateOption[] = new Array<DateOption>();
 }

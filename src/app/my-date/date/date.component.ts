@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MyDate } from '../../models/date.model';
+import { MyDate, DateCard, DateOption } from '../../models/date.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs';
 import * as firebase from 'firebase';
+import { BuilderService } from '../../builder/builder.service';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class DateComponent implements OnInit, OnDestroy {
   userId: string = '';
   dateId: string = '';
   dateStarted: boolean = false;
+  dateFinished: boolean = false;
   isLoggedIn: boolean = false;
   private cancellationToken = new Subject<any>();
 
-  constructor(private _activatedRoute: ActivatedRoute, private db: AngularFireDatabase, private afAuth: AngularFireAuth) { }
+  constructor(private _activatedRoute: ActivatedRoute, private db: AngularFireDatabase, private afAuth: AngularFireAuth, 
+    private _builderService: BuilderService) { }
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
@@ -50,6 +53,26 @@ export class DateComponent implements OnInit, OnDestroy {
   startDate() {
     this.date.dateOptions[0].started = true;
     this.dateStarted = true;
+    this.saveToDatabase();
+  }
+
+  optionSelected(part: DateCard) {
+    part.selected = true;
+    this.saveToDatabase();
+  }
+
+  optionFinished(option: DateOption) {
+    option.finished = true;
+    let nextIndex = option.optionNumber;
+
+    if (nextIndex === 3) {
+      this.dateFinished = true;
+      this.saveToDatabase();
+      return;
+    }
+
+    this.date.dateOptions[nextIndex].started = true;
+    this.saveToDatabase();
   }
 
   login() {
@@ -59,6 +82,14 @@ export class DateComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.cancellationToken.next();
     this.cancellationToken.complete();
+  }
+
+  private saveToDatabase() {
+    this._builderService.saveDate(this.date).take(1).subscribe(result => {
+      if (result) {
+        console.log('Date Successfully cached');
+      }
+    });
   }
 
   private dateSettings(date: MyDate) {

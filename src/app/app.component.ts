@@ -26,8 +26,6 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.items = this.db.list('/date').valueChanges(); //Realtime observable for getting data
     this.afAuth.authState.subscribe(user => { //if null logged out, else logged in
-      console.log('hit');
-      //console.log(user);
       if (this.user) {
         this.userName = user.displayName;
         this.loginOut = 'Logout';

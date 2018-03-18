@@ -25,7 +25,7 @@
 </div>
 <div class="row gimme-space-top">
     <div class="col-11">
-      <a class="btn btn-lg btn-secondary float-right" (click)="bumpDateAndSave()">Save and Finish!</a>
+      <button class="btn btn-lg btn-secondary float-right" [disabled]="!isDateReady" (click)="bumpDateAndSave()">Save and Finish!</button>
     </div>
   </div>
 

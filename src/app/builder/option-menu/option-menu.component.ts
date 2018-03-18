@@ -16,6 +16,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class OptionMenuComponent implements OnInit {
 
   dateNumber: number;
+  isDateReady: boolean = false;
   continueText: string;
   date: MyDate = new MyDate();
 
@@ -49,6 +50,14 @@ export class OptionMenuComponent implements OnInit {
 
   private setDate(date: any) {
     this.date = JSON.parse(date);
+    if (this.date.dateOptions && this.date.dateOptions.length === 3) {
+      let lastOption = this.date.dateOptions[2];
+      if (lastOption.option1 && lastOption.option1.name) {
+        if (lastOption.option2 && lastOption.option2.name) {
+          this.isDateReady = true;
+        }
+      }
+    }
   }
 
 }

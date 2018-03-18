@@ -19,29 +19,47 @@
     </div>
     <ng-template #dateTemplate>
       <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
-        <div *ngIf="part.started" class="row small-margins gimme-space-top">
-          <div class="mx-auto col-md-4">
+        <div *ngIf="part.started && !part.finished" class="row small-margins gimme-space-top">
+          <div *ngIf="!part.option2.selected" class="mx-auto text-center" [ngClass]="part?.option1.selected ? col-md-12 : col-md-4">
               <div class="card mt-2 mb-2 text-white bg-secondary">
-                <div class="card-header">
-                  <button class="btn btn-lg btn-default">{{part.option1?.label}}</button>
+                <div *ngIf="!part.option1.selected">
+                  <button class="btn btn-lg btn-default" (click)="optionSelected(part?.option1)">{{part.option1?.label}}</button>
                 </div>
-                <div class="card-body">
-                  <!-- Meat and potatoes-->
+                <div *ngIf="part.option1.selected">
+                  <div class="card-body">
+                    <h5>{{part.option1.name}}</h5>
+                    {{part.option1.address}}
+                  </div>
+                  <div class="card-footer">
+                      <button class="btn btn-lg btn-block" (click)="optionFinished(part)">Finished!</button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="mx-auto col-md-4">
+            <div *ngIf="!part.option1.selected" class="mx-auto text-center" [ngClass]="part?.option2.selected ? col-md-12 : col-md-4">
               <div class="card mt-2 mb-2 text-white bg-secondary">
-                <div class="card-header">
-                  <button class="btn btn-lg btn-default">{{part.option2.label}}</button>
+                <div *ngIf="!part.option2.selected">
+                  <button class="btn btn-lg btn-default" (click)="optionSelected(part?.option2)">{{part.option2.label}}</button>
                 </div>
-                <div class="card-body">
-                  <!-- Meat and potatoes-->
-                </div>
+                <div *ngIf="part.option2.selected">
+                    <div class="card-body">
+                        <h5>{{part.option2.name}}</h5>
+                        {{part.option2.address}}
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-lg btn-block" (click)="optionFinished(part)">Finished!</button>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
       </ng-template>
+      <div *ngIf="dateFinished" class="row mt-4">
+          <div class="col-12 mx-auto text-center">
+              <h6>Thanks For Going on a Create A Date!</h6>
+              <div>We're excited to see you again soon.  Click the links below to share this date with your friends</div>
+          </div>
+      </div>
     </ng-template>
   </div>

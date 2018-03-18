@@ -17,7 +17,6 @@ export class BuilderService {
         this.currentDate.dateId = new Date().valueOf();
         this.currentDate.userId = userId;
         this.currentDate.dateOptions = new Array<DateOption>();    
-        console.log(this.currentDate);
         this.addDateOption();
         return this.currentDate; 
     }

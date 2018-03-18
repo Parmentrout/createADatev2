@@ -4,6 +4,7 @@ import { MyDateComponent } from './my-date.component';
 import { RouterModule } from '@angular/router';
 import { StartDateComponent } from './start-date/start-date.component';
 import { DateComponent } from './date/date.component';
+import { BuilderService } from '../builder/builder.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { DateComponent } from './date/date.component';
       {path: 'date/:dateId/:userId', component: DateComponent}
     ])
   ],
-  declarations: [MyDateComponent, StartDateComponent, DateComponent]
+  declarations: [MyDateComponent, StartDateComponent, DateComponent],
+  providers: [BuilderService]
 })
 export class MyDateModule { }

@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
+import { BuilderService } from '../builder/builder.service';
 
 @Component({
   selector: 'app-my-date',
@@ -22,6 +23,7 @@ export class MyDateComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private db: AngularFireDatabase,
+    private builderService: BuilderService,
     private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
@@ -53,6 +55,24 @@ export class MyDateComponent implements OnInit {
   deleteDate(dateId: number) {
     let dateRecord = this.db.object(`dates/${this.user.uid}/${dateId}`);
     dateRecord.remove().then(() => {}).catch(() => alert('Error!'));
+  }
+
+  resetDate(date: MyDate) {
+    for (let option of date.dateOptions) {
+      option.started = false;
+      option.finished = false;
+
+      option.option1.selected = false;
+      option.option2.selected = false;
+
+      option.option1.finished = false;
+      option.option2.finished = false;
+    }
+    this.builderService.saveDate(date).take(1).subscribe(result => {
+      if (result) {
+        alert('Successfully Reset Date!');
+      }
+    })
   }
 
   login() {
