@@ -1,6 +1,6 @@
 <div class="row gimme-space-top mx-auto">
  <div class="mx-auto col-md-8 col-xs-12">
-    <div class="card text-white bg-secondary">
+    <div class="card text-white bg-info">
       <div class="card-header">Option {{cardNumber}}</div>
       <div class="card-body">
           <h4 class="card-title">Now it's time to set your options. The first thing you'll set is what is displayed to your date.</h4>
@@ -18,7 +18,9 @@
           <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
               <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
           </agm-map>
-        <button class="btn btn-lg btn-block btn-default" type="submit" [disabled]="!searchControl.valid || !placeSelected" (click)="saveForm()">Save Option {{cardNumber}}</button>
+      </div>
+      <div class="card-footer">
+          <button class="btn btn-lg btn-block btn-primary" type="submit" [disabled]="!placeSelected || !cardLabel" (click)="saveForm()">Save Option {{cardNumber}}</button>
       </div>
     </div>
   </div> 

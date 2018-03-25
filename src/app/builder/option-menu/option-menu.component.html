@@ -1,31 +1,34 @@
+<div class="container">
 <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
-<div class="row gimme-space-top mx-auto">
+<div class="row gimme-space-top">
   <div class="col-12">
-      <h3 align="center">{{date.dateName}} Part {{part?.optionNumber}}</h3>
+      <h3>{{date.dateName}} Part {{part?.optionNumber}}</h3>
   </div>
 </div>
   <div class="row small-margins gimme-space-top">
-      <div class="mx-auto col-md-4">
+      <div class="col-md-4">
           <div class="card mt-2 mb-2 text-white bg-info">
             <div class="card-header" [innerHtml]="part.option1?.name || 'Option 1'"></div>
-            <div class="card-body">
-              <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/1" [innerHtml]="part.option1?.label || 'Set Option 1'"></a>
+            <div class="card-footer">
+              <a class="btn btn-primary btn-block btn-lg pull-right" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/1" [innerHtml]="part.option1?.label || 'Set Option 1'"></a>
             </div>
           </div>
       </div>
-    <div class="mx-auto col-md-4">
+      <div class="col-md-2"></div>
+    <div class="col-md-4">
       <div class="card mt-2 mb-2 text-white bg-info">
         <div class="card-header" [innerHtml]="part.option2?.name || 'Option 2'"></div>
-        <div class="card-body">
-          <a class="btn btn-lg btn-block btn-secondary" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/2" [innerHtml]="part.option2?.label || 'Set Option 2'" ></a>
+        <div class="card-footer">
+          <a class="btn btn-lg btn-block btn-primary float-right" href="/build/option/{{date?.dateId}}/{{part?.optionNumber}}/2" [innerHtml]="part.option2?.label || 'Set Option 2'" ></a>
         </div>
       </div>
     </div>
   </div>
+  <hr>
 </div>
 <div class="row gimme-space-top">
     <div class="col-11">
-      <button class="btn btn-lg btn-secondary float-right" [disabled]="!isDateReady" (click)="bumpDateAndSave()">Save and Finish!</button>
+      <button class="btn btn-lg btn-secondary" [disabled]="!isDateReady" (click)="bumpDateAndSave()">Save and Finish!</button>
     </div>
   </div>
-
+</div>

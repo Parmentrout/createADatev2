@@ -27,7 +27,7 @@ export class OptionMenuComponent implements OnInit {
     private router: Router, private builderService: BuilderService) { }
 
   ngOnInit() {
-
+    window.scrollTo(0, 0);
     this.activatedRoute.paramMap
     .map(paramMap => paramMap.get('id'))
     .subscribe(id => { 

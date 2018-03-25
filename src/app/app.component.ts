@@ -6,6 +6,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { firestore } from 'firebase/app';
 
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,56 +17,50 @@ export class AppComponent implements OnInit{
   loginOut = 'login';
   loggedIn = false;
   userName: string;
-  user: any;
   test: any;
-  items: any;
   message: string;
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
   }
 
   ngOnInit(){
-    this.items = this.db.list('/date').valueChanges(); //Realtime observable for getting data
     this.afAuth.authState.subscribe(user => { //if null logged out, else logged in
-      if (this.user) {
+      if (user) {
         this.userName = user.displayName;
-        this.loginOut = 'Logout';
-        this.loggedIn = false;
-      } else {
+        this.loginOut = 'logout';
         this.loggedIn = true;
+      } else {
+        this.loginOut = 'login';
+        this.loggedIn = false;
       }
     });
   }
 
-  // logInOut() {
-  //   if (!this.loggedIn) {
-  //     this.login().then(user => {
-  //       this.loginOut = 'Logout';
-  //       this.loggedIn = true;
-  //     });
-  //   } else {
-  //     this.logout().then(() => {
-  //       this.loginOut = 'Login';
-  //       this.loggedIn = false;
-  //     });
-  //   }
-
-  //   this.loggedIn = !this.loggedIn;
-  // }
+  logInOut() {
+    if (!this.loggedIn) {
+      this.login().then(user => {
+        this.loginOut = 'logout';
+        this.loggedIn = true;
+      });
+    } else {
+      this.logout().then(() => {
+        this.loginOut = 'login';
+        this.loggedIn = false;
+        this.router.navigate(['/home']);
+      });
+    }
+  }
 
   login() {
-     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-     this.loggedIn = !this.loggedIn;
+     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
-    console.log('logout');
-    this.afAuth.auth.signOut();
-    this.loggedIn = !this.loggedIn;
+    return this.afAuth.auth.signOut();
   }
 
-  writeToDatabase() {
-    let date = this.db.object('date/abc');
-    date.set({name: 'My date 1'}).then(() => this.message = "Success");
-  }
+  // writeToDatabase() {
+  //   let date = this.db.object('date/abc');
+  //   date.set({name: 'My date 1'}).then(() => this.message = "Success");
+  // }
 
   testRead() {
    

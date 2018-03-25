@@ -13,4 +13,21 @@
         margin-right: 5px;
         margin-left: 5px;
     }
+
+    .or-text {
+        margin-top:15px;
+        margin-bottom:15px;
+    }
 }
+
+/* a {
+    color: #EB6864 !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #e22620 !important;
+    text-decoration: underline !important;
+} */

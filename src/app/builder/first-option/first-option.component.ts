@@ -1,4 +1,4 @@
-import { ElementRef, NgZone, Component, OnInit, ViewChild } from '@angular/core';
+import { ElementRef, NgZone, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
@@ -7,13 +7,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MyDate, DateCard } from '../../models/date.model';
 import { BuilderService } from '../builder.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-first-option',
   templateUrl: './first-option.component.html',
   styleUrls: ['./first-option.component.css']
 })
-export class FirstOptionComponent implements OnInit {
+export class FirstOptionComponent implements OnInit, OnDestroy {
 
   public placeSelected: boolean = false;
   public latitude: number;
@@ -34,6 +35,7 @@ export class FirstOptionComponent implements OnInit {
   private place: google.maps.places.PlaceResult;
   public cardLabel: string = '';
   public isCreatePage: boolean = true;
+  private cancellationToken = new Subject<any>();
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -90,7 +92,7 @@ export class FirstOptionComponent implements OnInit {
               }
             }
 
-            this.zoom = 12;
+            this.zoom = 15;
 
           });
       });
@@ -126,10 +128,15 @@ export class FirstOptionComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          this.zoom = 15;
         });
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.cancellationToken.next();
+    this.cancellationToken.complete();
   }
 
   private setCurrentPosition() {
@@ -137,7 +144,7 @@ export class FirstOptionComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 12;
+        this.zoom = 15;
       });
     }
   }
@@ -145,7 +152,6 @@ export class FirstOptionComponent implements OnInit {
   public saveForm() {
     // What to save
     // Name, address, hours, website, id, url
-    //console.log(this.searchControl);
     let place = this.place;
 
     let option = this.date.dateOptions[parseInt(this.optionNumber) - 1];
@@ -155,8 +161,8 @@ export class FirstOptionComponent implements OnInit {
       option.option1.name = place.name;
       option.option1.label = this.cardLabel;
       option.option1.address = place.formatted_address;
-      option.option1.latitude = place.geometry.location.lat();
-      option.option1.longitude = place.geometry.location.lng();
+      option.option1.latitude = this.latitude;
+      option.option1.longitude = this.longitude;
 
       option.option1.placesInfo = place;
     } else if (card === 2) {
@@ -164,8 +170,8 @@ export class FirstOptionComponent implements OnInit {
       option.option2.name = place.name;
       option.option2.label = this.cardLabel;
       option.option2.address = place.formatted_address;
-      option.option2.latitude = place.geometry.location.lat();
-      option.option2.longitude = place.geometry.location.lng();
+      option.option2.latitude = this.latitude;
+      option.option2.longitude = this.longitude;
 
       option.option2.placesInfo = place;
     } else { 

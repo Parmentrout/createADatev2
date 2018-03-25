@@ -40,8 +40,7 @@
           <a class="nav-link" [routerLink]="['/my-date']">my dates</a>
         </li>
         <li class="nav-item">
-            <a *ngIf="loggedIn" class="nav-link" (click)="login()">login</a>
-            <a *ngIf="!loggedIn" class="nav-link" (click)="logout()">logout</a>
+            <a class="nav-link" (click)="logInOut()">{{loginOut}}</a>
         </li>
       </ul>
       <!-- <ul class="navbar-nav">

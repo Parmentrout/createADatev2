@@ -37,10 +37,7 @@ export class DateComponent implements OnInit, OnDestroy {
       let user = paramMap.get('userId');
       let date = paramMap.get('dateId');
       this.db.object(`dates/${user}/${date}`).snapshotChanges().subscribe(date => {
-        // if (!dates || dates.length === 0) {
-        //   //Error, we should route somewhere
-        //     return;
-        //   }
+
           let dateLookup = date;
           let dateConvert: MyDate = JSON.parse(date.payload.toJSON().toString());
 
@@ -98,5 +95,27 @@ export class DateComponent implements OnInit, OnDestroy {
     if (started.length > 0) {
       this.dateStarted = true;
     }
+
+    if (date.dateOptions[2].finished) {
+      this.dateFinished = true;
+    }
+  }
+
+  resetDate() {
+    for (let option of this.date.dateOptions) {
+      option.started = false;
+      option.finished = false;
+
+      option.option1.selected = false;
+      option.option2.selected = false;
+
+      option.option1.finished = false;
+      option.option2.finished = false;
+    }
+    this._builderService.saveDate(this.date).take(1).subscribe(result => {
+      if (result) {
+        location.reload();
+      }
+    })
   }
 }
