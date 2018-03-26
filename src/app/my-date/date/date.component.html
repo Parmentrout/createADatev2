@@ -7,51 +7,79 @@
   <ng-template #fullTemplate>
     <div class="row">
       <div class="col-12 mx-auto text-center">
-        <h3>{{date?.dateName}}</h3>
+        <h3>{{date?.dateName}} </h3>
         <div><i>{{date?.description}}</i></div>
       </div>
     </div>
     <div *ngIf="!dateStarted; else dateTemplate" class="row mt-4">
         <div class="col-12 mx-auto text-center">
             <h6>Are you ready!?</h6>
-            <button class="btn btn-lg btn-default" (click)="startDate()">Let's Start The date!</button>
+            <button class="btn btn-lg btn-primary" (click)="startDate()">Let's Start The date!</button>
         </div>
     </div>
     <ng-template #dateTemplate>
       <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
-        <div *ngIf="part.started && !part.finished" class="row small-margins gimme-space-top">
+        <div *ngIf="part.started && !part.finished" class="small-margins gimme-space-top">
+          <div *ngIf="!part.option1.selected && !part.option2.selected" class="row gimme-space-bottom">
+              <div class="col-sm-12 text-center">
+                  <h5 *ngIf="part.optionNumber === 1">For the first part of your date, your options are below.  Choose wisely...</h5>
+                  <h5 *ngIf="part.optionNumber === 2">Now for the main course, what are we doing next?</h5>
+                  <h5 *ngIf="part.optionNumber === 3">The grand finale! What'll it be..</h5>
+              </div>
+          </div>
+          <div class="row">
           <div *ngIf="!part.option2.selected" class="mx-auto text-center" [ngClass]="part?.option1.selected ? col-md-12 : col-md-4">
-              <div class="card mt-2 mb-2 text-white bg-secondary">
+              <div class="card ml-4 mr-4 mt-2 mb-2 text-white bg-info">
                 <div *ngIf="!part.option1.selected">
-                  <button class="btn btn-lg btn-default" (click)="optionSelected(part?.option1)">{{part.option1?.label}}</button>
+                  <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option1)">{{part.option1?.label}}</button>
                 </div>
                 <div *ngIf="part.option1.selected">
+                  <div class="card-header">
+                      <h4>{{part.option1.name}}</h4>
+                  </div>
                   <div class="card-body">
-                    <h5>{{part.option1.name}}</h5>
-                    {{part.option1.address}}
+                    <div>{{part.option1.address}}</div>
+                    <div>
+                        <span *ngIf="part.option1?.placesInfo?.opening_hours?.open_now; else closed"><strong>Open</strong></span>
+                        <ng-template #closed><span><strong>Closed</strong></span></ng-template>
+                    </div>
+                    <br>
+                    <a href="{{part.option1?.placesInfo?.url}}">Get Directions</a>
                   </div>
                   <div class="card-footer">
-                      <button class="btn btn-lg btn-block" (click)="optionFinished(part)">Finished!</button>
+                      <button class="btn btn-lg btn-primary btn-block" (click)="optionFinished(part)">Finished!</button>
                   </div>
                 </div>
               </div>
+            </div>
+            <div *ngIf="!part.option1.selected && !part.option2.selected" class="text-center">
+              <strong>Or...</strong>
             </div>
             <div *ngIf="!part.option1.selected" class="mx-auto text-center" [ngClass]="part?.option2.selected ? col-md-12 : col-md-4">
-              <div class="card mt-2 mb-2 text-white bg-secondary">
+              <div class="card mt-2 mb-2 ml-4 mr-4 text-white bg-info">
                 <div *ngIf="!part.option2.selected">
-                  <button class="btn btn-lg btn-default" (click)="optionSelected(part?.option2)">{{part.option2.label}}</button>
+                  <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option2)">{{part.option2.label}}</button>
                 </div>
                 <div *ngIf="part.option2.selected">
+                  <div class="card-header">
+                      <h4>{{part.option2.name}}</h4>
+                  </div>
                     <div class="card-body">
-                        <h5>{{part.option2.name}}</h5>
-                        {{part.option2.address}}
+                        <div>{{part.option2.address}}</div>
+                        <div>
+                            <span *ngIf="part.option2?.placesInfo?.opening_hours?.open_now; else closedNext"><strong>Open</strong></span>
+                            <ng-template #closedNext><span><strong>Closed</strong></span></ng-template>
+                        </div>
+                        <br>
+                        <a href="{{part.option2?.placesInfo?.url}}">Get Directions</a>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-lg btn-block" (click)="optionFinished(part)">Finished!</button>
+                        <button class="btn btn-lg btn-primary btn-block" (click)="optionFinished(part)">Finished!</button>
                     </div>
                   </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </ng-template>

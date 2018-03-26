@@ -8,7 +8,7 @@
           <form>
               <div class="form-group">
                   <label for="dateName">Option {{cardNumber}} Display Name:</label>
-                  <input type="text" required name="dateName" #dateName class="form-control" id="dateName" aria-describedby="date" placeholder="Fancy" [(ngModel)]="cardLabel">
+                  <input type="text" maxlength="10" required name="dateName" #dateName class="form-control" id="dateName" aria-describedby="date" placeholder="Fancy" [(ngModel)]="cardLabel">
                 </div>
               <div class="form-group">
                   <label for="nameOfDate">Location:</label>
