@@ -20,6 +20,7 @@ import { DateModule } from './date/date.module';
 import { HomeModule } from './home/home.module';
 import { MyDateModule } from './my-date/my-date.module';
 import { UserService } from './user.service';
+import { DateComponent } from './date/date.component';
 
 @NgModule({
   declarations: [

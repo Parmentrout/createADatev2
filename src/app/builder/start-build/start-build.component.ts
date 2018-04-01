@@ -14,6 +14,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class StartBuildComponent implements OnInit {
   model: MyDate = new MyDate();
   userId: string;
+  userEmail: string;
   errorMessages: string;
   formSaving: boolean = false;
   isCreate: boolean = true;
@@ -27,6 +28,7 @@ export class StartBuildComponent implements OnInit {
     this.afAuth.authState.subscribe(user => { //if null logged out, else logged in
       if (user) {
         this.userId = user.uid;
+        this.userEmail = user.email;
         this._activatedRoute.paramMap
         .map(paramMap => paramMap.get('id'))
         .subscribe(id => {
@@ -49,7 +51,8 @@ export class StartBuildComponent implements OnInit {
   save() {
     this.formSaving = true;
     if (this.isCreate) {
-      let newDate = this.builderService.startDate(this.model.dateName, this.model.description, this.userId);
+      let isSample = this.userEmail === 'createadateapp@gmail.com';
+      let newDate = this.builderService.startDate(this.model.dateName, this.model.description, this.userId, isSample);
       this.builderService.saveDate().take(1)
         .subscribe(result => {
           this.formSaving = false;

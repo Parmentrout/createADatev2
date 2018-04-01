@@ -1,6 +1,20 @@
-<p>
-    check out our sample dates below
-  </p>
+<div class="container">
+  <div class="row gimme-space-top">
+    <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
+        <div class="col-12 mx-auto">
+          <div class="date-options">
+              <h4>{{item.dateName}}</h4>
+              <p>{{item.description}}</p>
+              <div>
+                <span>
+                  <a href="/my-date/date/{{item.dateId}}/EGpGpztEstbO8OxpDrJ2TxkXyhY2">Go On Date</a>
+                </span>
+              </div>
+              <hr>
+          </div>
+        </div>
+    </div>
+</div>
 
 <!-- <p>
   check out our sample dates below

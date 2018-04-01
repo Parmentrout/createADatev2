@@ -10,12 +10,13 @@ export class BuilderService {
     constructor(private db: AngularFireDatabase) {
     }
 
-    public startDate(name: string, desc: string, userId: string) {
+    public startDate(name: string, desc: string, userId: string, isSample: boolean = false) {
         this.currentDate = new MyDate();
         this.currentDate.dateName = name;
         this.currentDate.description = desc;
         this.currentDate.dateId = new Date().valueOf();
         this.currentDate.userId = userId;
+        this.currentDate.isSampleDate = isSample;
         this.currentDate.dateOptions = new Array<DateOption>();    
         this.addDateOption();
         return this.currentDate; 

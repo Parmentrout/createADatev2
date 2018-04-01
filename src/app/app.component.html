@@ -43,6 +43,7 @@
             <a class="nav-link" (click)="logInOut()">{{loginOut}}</a>
         </li>
       </ul>
+      <div *ngIf="loggedIn" class="text-white">Welcome {{userName}}!</div>
       <!-- <ul class="navbar-nav">
         <h6 >Welcome {{userName}}!</h6>
         <li class="nav-item">

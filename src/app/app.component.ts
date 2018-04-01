@@ -51,7 +51,7 @@ export class AppComponent implements OnInit{
   }
 
   login() {
-     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+     return this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
     return this.afAuth.auth.signOut();
