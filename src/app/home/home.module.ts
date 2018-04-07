@@ -8,9 +8,10 @@ import { DateComponent } from '../date/date.component';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: HomeComponent}
+      {path: '', component: HomeComponent},
+      {path: 'sample-dates', component: DateComponent}
     ])
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent, DateComponent]
 })
 export class HomeModule { }

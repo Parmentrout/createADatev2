@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="row gimme-space-top">
     <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
-        <div class="col-12 mx-auto">
+        <div class="col-12">
           <div class="date-options">
               <h4>{{item.dateName}}</h4>
               <p>{{item.description}}</p>
@@ -13,7 +12,7 @@
               <hr>
           </div>
         </div>
-    </div>
+      </div>
 </div>
 
 <!-- <p>

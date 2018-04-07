@@ -1,4 +1,3 @@
-<div class="container-fluid">
   <div class="jumbotron">
     <h1 class="display-3">create a date</h1>
     <p class="lead">where will your next date take you?</p>
@@ -10,20 +9,43 @@
       <a class="btn btn-primary btn-lg" href="/build" role="button">build a date</a>
     </p>
   </div>
-<div id="aboutDescription" class="m-4">
-    <div class="row">
-        <h1>how it works</h1>
+<div class="container-fluid">
+    <!-- <div id="aboutDescription" class="m-4">
+        <div class="row">
+            <h1>how it works</h1>
+        </div>
+        <div class="row">
+            <p>
+                Remember those choose your own adventure books from when you were a kid? We modeled
+                "create a date" off of those fond memories! You start by creating a date and then fill in activity choices based on your location. When you go
+                on your date your significant other will be able to choose between the location and then
+                subsequent activities. It will be an experience you'll never forget.
+                Still confused? Check out our sample dates!
+            </p>
+        </div>
     </div>
+    <hr> -->
+    <div class="m-2">
     <div class="row">
-        <p>
-            Remember those choose your own adventure books from when you were a kid? We modeled
-            "create a date" off of those fond memories! You start by creating a date and then fill in activity choices based on your location. When you go
-            on your date your significant other will be able to choose between the location and then
-            subsequent activities. It will be an experience you'll never forget.
-            Still confused? Check out our sample dates!
-        </p>
+        <div class="col-12">
+                <h1>sample dates</h1>
+        </div>
+        </div>
+        <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
+            <div class="col-12 mx-auto">
+                <div class="date-options">
+                    <h4>{{item.dateName}}</h4>
+                    <p>{{item.description}}</p>
+                    <div>
+                    <span>
+                        <a href="/my-date/date/{{item.dateId}}/EGpGpztEstbO8OxpDrJ2TxkXyhY2">Go On Date</a>
+                    </span>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-<hr>
+
 <!-- <app-date></app-date> -->

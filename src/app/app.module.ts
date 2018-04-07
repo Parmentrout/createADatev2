@@ -16,11 +16,11 @@ import { AUTH_PROVIDERS} from 'angularfire2/auth'
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { BuilderModule } from './builder/builder.module';
-import { DateModule } from './date/date.module';
 import { HomeModule } from './home/home.module';
 import { MyDateModule } from './my-date/my-date.module';
 import { UserService } from './user.service';
 import { DateComponent } from './date/date.component';
+import { SampleDateService } from './sample-date.service';
 
 @NgModule({
   declarations: [
@@ -34,11 +34,10 @@ import { DateComponent } from './date/date.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HomeModule,
-    DateModule,
     MyDateModule,
     BuilderModule
   ],
-  providers: [ AngularFireDatabase, UserService ],
+  providers: [ AngularFireDatabase, UserService, SampleDateService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
