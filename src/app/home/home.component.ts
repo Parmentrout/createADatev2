@@ -14,7 +14,17 @@ export class HomeComponent implements OnInit {
   constructor(private sampleDateService: SampleDateService) { }
 
   ngOnInit() {
-   this.dates$ = this.sampleDateService.getSampleDates();
+   this.dates$ = this.sampleDateService.getSampleDates().map(result => {
+      
+      for (let date of result) {
+        if (date === result[0]) {
+          date.class = 'carousel-item active';
+        } else {
+          date.class= 'carousel-item'
+        }
+      }
+      return result;
+  });
   }
 
 }

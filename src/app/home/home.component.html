@@ -1,31 +1,48 @@
   <div class="jumbotron">
-    <h1 class="display-3">create a date</h1>
-    <p class="lead">where will your next date take you?</p>
-    <hr class="my-4">
-    <p>Relieve a piece of your childhood by creating a choose your own adventure esk date for that special someone in your life.
-    </p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="/date" role="button">go on a date</a>
-      <a class="btn btn-primary btn-lg" href="/build" role="button">build a date</a>
-    </p>
+    <h1 class="display-3 title-display">create a date</h1>
+    <p class="lead text-center">where will your next date take you?</p>
   </div>
-<div class="container-fluid">
-    <!-- <div id="aboutDescription" class="m-4">
-        <div class="row">
-            <h1>how it works</h1>
-        </div>
-        <div class="row">
-            <p>
-                Remember those choose your own adventure books from when you were a kid? We modeled
-                "create a date" off of those fond memories! You start by creating a date and then fill in activity choices based on your location. When you go
-                on your date your significant other will be able to choose between the location and then
-                subsequent activities. It will be an experience you'll never forget.
-                Still confused? Check out our sample dates!
+<div class="jumbotron bg-white">
+       <div class="text-center">
+            <h3 class="gimme-space-bottom" >how it works</h3>
+            <p class="lead space-bottom">Relieve a piece of your childhood by creating a choose your own adventure esk date for that special someone in your life.
             </p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg mr-4" href="/date" role="button">go on a date</a>
+              <a class="btn btn-primary btn-lg ml-4" href="/build" role="button">build a date</a>
+            </p>
+       </div>
+</div>
+<div class="container-fluid">
+        <div class="text-center">
+             <h3>sample dates</h3>
+             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                    <div *ngFor="let item of dates$ | async" [ngClass]="item.class">
+                        <div class="jumbotron bg-white">
+                            <h1 class="display-3 title-display">{{item.dateName}}</h1>
+                            <p class="lead text-center">{{item.description}}</p>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
         </div>
-    </div>
-    <hr> -->
-    <div class="m-2">
+ </div>
+
+<!-- <div class="container-fluid">
+    <div>
     <div class="row">
         <div class="col-12">
                 <h1>sample dates</h1>
@@ -46,6 +63,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- <app-date></app-date> -->

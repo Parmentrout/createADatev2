@@ -4,7 +4,7 @@ export interface IMyDate {
     userId: string;
     dateId: number;
     isSampleDate: boolean;
-
+    class: string;
     dateOptions: IDateOption[];
 }
 
@@ -14,7 +14,7 @@ export class MyDate implements IMyDate {
     userId: string = '';
     dateId: number = 0;
     isSampleDate: boolean = false;
-
+    class: string = '';
     dateOptions: IDateOption[] = new Array<DateOption>();
 }
 
