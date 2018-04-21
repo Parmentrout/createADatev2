@@ -16,6 +16,7 @@ import { BuilderService } from '../../builder/builder.service';
 })
 export class DateComponent implements OnInit, OnDestroy {
   date: MyDate;
+  shareUrl = '';
   userId: string = '';
   dateId: string = '';
   dateStarted: boolean = false;
@@ -45,6 +46,8 @@ export class DateComponent implements OnInit, OnDestroy {
           this.date = dateConvert;
       });
     });
+
+     this.shareUrl = `https%3A%2F%2Fcreateadate-26879.firebaseapp.com%2Fmy-date%2Fdate%2F${this.dateId}%2${this.userId}`;
   }
 
   startDate() {

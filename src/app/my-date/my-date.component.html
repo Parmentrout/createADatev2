@@ -12,7 +12,7 @@
           <p>{{item.description}}</p>
           <div>
             <span>
-              <a href="/my-date/date/{{item.dateId}}/{{user.uid}}">Go On Date</a> | 
+              <span *ngIf="isDateReady(item)"><a href="/my-date/date/{{item.dateId}}/{{user.uid}}">Go On Date</a> | </span> 
               <a href="/build/start-build/{{item.dateId}}">Edit Date</a> | 
               <a class="date-link" (click)="resetDate(item)">Reset Date</a> |
               <a class="date-link" (click)="deleteDate(item.dateId)">Delete Date</a>

@@ -51,10 +51,16 @@ export class OptionMenuComponent implements OnInit {
   private setDate(date: any) {
     this.date = JSON.parse(date);
     if (this.date.dateOptions && this.date.dateOptions.length === 3) {
+      let firstOption = this.date.dateOptions[0];
+      let middleOption = this.date.dateOptions[1];
       let lastOption = this.date.dateOptions[2];
-      if (lastOption.option1 && lastOption.option1.name) {
-        if (lastOption.option2 && lastOption.option2.name) {
-          this.isDateReady = true;
+      if (firstOption.option1 && firstOption.option1.name && firstOption.option2 && firstOption.option2.name) {
+        if (middleOption.option1 && middleOption.option1.name && middleOption.option2 && middleOption.option2.name) {
+          if (lastOption.option1 && lastOption.option1.name) {
+            if (lastOption.option2 && lastOption.option2.name) {
+              this.isDateReady = true;
+            }
+          }
         }
       }
     }

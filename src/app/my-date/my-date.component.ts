@@ -75,6 +75,28 @@ export class MyDateComponent implements OnInit {
     })
   }
 
+  isDateReady(date: MyDate): boolean {
+    let result = false;
+
+      if (date.dateOptions && date.dateOptions.length === 3) {
+        let firstOption = date.dateOptions[0];
+        let middleOption = date.dateOptions[1];
+        let lastOption = date.dateOptions[2];
+        if (firstOption.option1 && firstOption.option1.name && firstOption.option2 && firstOption.option2.name) {
+          if (middleOption.option1 && middleOption.option1.name && middleOption.option2 && middleOption.option2.name) {
+            if (lastOption.option1 && lastOption.option1.name) {
+              if (lastOption.option2 && lastOption.option2.name) {
+                result = true;
+              }
+            }
+          }
+        }
+    }
+
+
+    return result;
+  }
+
   login() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
  }
