@@ -1,37 +1,51 @@
-<div class="container gimme-space-top">
+<div class="container-fluid">
   <div class="row gimme-space-top" *ngIf="!isLoggedIn; else fullTemplate">
     <div class="col-12 mx-auto">
         You must <a (click)="login()"><u>Login</u></a> to build a date!
     </div>
   </div>
   <ng-template #fullTemplate>
-    <div class="row">
-      <div class="col-12 mx-auto text-center">
-        <h3>{{date?.dateName}} </h3>
-        <div><i>{{date?.description}}</i></div>
-      </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-12 text-center">
+              <div class="display-4">{{date?.dateName}} </div>
+              <p class="lead gimme-space-top">{{date?.description}}</p>
+            </div>
+          </div>
+          <div *ngIf="!dateStarted" class="row mt-4">
+              <div class="col-12 mx-auto text-center">
+                  <h5>Are you ready!?</h5>
+              </div>
+          </div>
     </div>
-    <div *ngIf="!dateStarted; else dateTemplate" class="row mt-4">
-        <div class="col-12 mx-auto text-center">
-            <h6>Are you ready!?</h6>
-            <button class="btn btn-lg btn-primary" (click)="startDate()">Let's Start The date!</button>
-        </div>
+    <div *ngIf="!dateStarted" class="text-center gimme-space-top">
+        <button class="btn btn-lg btn-primary gimme-space-top" (click)="startDate()">Let's Start The date!</button>
     </div>
-    <ng-template #dateTemplate>
+    <div *ngIf="dateStarted">
       <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
         <div *ngIf="part.started && !part.finished" class="small-margins gimme-space-top">
-          <div *ngIf="!part.option1.selected && !part.option2.selected" class="row gimme-space-bottom">
+          <!-- <div *ngIf="!part.option1.selected && !part.option2.selected" class="row gimme-space-bottom">
               <div class="col-sm-12 text-center">
                   <h5 *ngIf="part.optionNumber === 1">For the first part of your date, your options are below.  Choose wisely...</h5>
                   <h5 *ngIf="part.optionNumber === 2">Now for the main course, what are we doing next?</h5>
                   <h5 *ngIf="part.optionNumber === 3">The grand finale! What'll it be..</h5>
               </div>
-          </div>
+          </div> -->
           <div class="row">
-          <div *ngIf="!part.option2.selected" class="mx-auto text-center" [ngClass]="part?.option1.selected ? col-md-12 : col-md-4">
-              <div class="card ml-4 mr-4 mt-2 mb-2 text-white bg-info">
+          <div *ngIf="!part.option2.selected" class="mx-auto text-center" [ngClass]="part?.option1.selected ? col-md-12 : col-xs-6">
+              <div class="card mt-2 mb-2 text-white bg-info">
                 <div *ngIf="!part.option1.selected">
-                  <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option1)">{{part.option1?.label}}</button>
+                  <div class="card-header">
+                      {{part.option1?.label}}
+                  </div>
+                  <div class="card-body">
+                    <button class="transparent-button">
+                      <img src="/assets/glass.png" class="img img-responsive">
+                    </button>
+                  </div>
+                  <div class="card-footer">
+                      <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option1)">{{part.option1?.label}}</button>
+                  </div>
                 </div>
                 <div *ngIf="part.option1.selected">
                   <div class="card-header">
@@ -47,18 +61,31 @@
                     <a href="{{part.option1?.placesInfo?.url}}">Get Directions</a>
                   </div>
                   <div class="card-footer">
-                      <button class="btn btn-lg btn-primary btn-block" (click)="optionFinished(part)">Finished!</button>
+                      <button class="btn btn-lg btn-primary btn-block" (click)="optionFinished(part)">
+                        <span *ngIf="part.optionNumber < 3">Continue to Part {{part.optionNumber + 1}}</span>
+                        <span *ngIf="part.optionNumber === 3">Finish Date</span>
+                      </button>
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
             <div *ngIf="!part.option1.selected && !part.option2.selected" class="text-center">
               <strong>Or...</strong>
             </div>
-            <div *ngIf="!part.option1.selected" class="mx-auto text-center" [ngClass]="part?.option2.selected ? col-md-12 : col-md-4">
-              <div class="card mt-2 mb-2 ml-4 mr-4 text-white bg-info">
+            <div *ngIf="!part.option1.selected" class="mx-auto text-center" [ngClass]="part?.option2.selected ? col-md-12 : col-xs-6">
+              <div class="card mt-2 mb-2 text-white bg-info">
                 <div *ngIf="!part.option2.selected">
-                  <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option2)">{{part.option2.label}}</button>
+                  <div class="card-header">
+                      {{part.option2?.label}}
+                  </div>
+                  <div class="card-body">
+                    <button class="transparent-button">
+                        <img src="/assets/glass.png" class="img img-responsive">
+                    </button>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-lg btn-block btn-primary" (click)="optionSelected(part?.option2)">{{part.option2.label}}</button>
+                  </div>
                 </div>
                 <div *ngIf="part.option2.selected">
                   <div class="card-header">
@@ -82,8 +109,8 @@
           </div>
           </div>
         </div>
-      </ng-template>
-      <div *ngIf="dateFinished" class="row mt-4">
+      </div>
+      <div *ngIf="dateFinished" class="row gimme-space-top mt-4">
           <div class="col-12 mx-auto text-center">
               <h6>Thanks For Going on a Create A Date!</h6>
               <div>We're excited to see you again soon.  Click the links below to share this date with your friends</div>

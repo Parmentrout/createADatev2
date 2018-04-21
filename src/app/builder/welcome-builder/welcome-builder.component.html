@@ -4,20 +4,22 @@
   <p>Let's get going! Build a new date by clicking below, or edit an existing date <a>here</a> 
   </p>
   <p class="lead">
-    <button class="btn btn-primary btn-lg" [disabled]="!loggedIn" (click)="startBuild()" role="button">Build New Date</button><br>
-    <span class="gimme-space-top" *ngIf="!loggedIn">
-      You must <a (click)="login()"><u>Login</u></a> to build a date!
-    </span> 
+    <button class="btn btn-primary btn-lg" [disabled]="!loggedIn" (click)="startBuild()" role="button">Build New Date</button>
     <!-- <div class="mt-2" *ngIf="!loggedIn">You must <a (click)="login()"><u>Login</u></a> to build a date!</div> -->
   </p>
+  <div class="gimme-space-top" *ngIf="!loggedIn">
+      You must <a (click)="login()"><u>Login</u></a> to build a date!
+    </div> 
 </div>
 <div class="container-fluid">
     <div class="row gimme-space-top">
       <div class="col-12">
-          <h5>Need some inspiration?  Check out one of our sample dates below to see what you can build:</h5>
+          <h5>Need some inspiration?  Check out one of our sample dates <a href="/home/sample-dates">here</a> to see what you can build!</h5>
       </div>
     </div>
-      <br><hr>
+  </div>
+
+      <!-- <br><hr>
         <div *ngFor="let item of dates$ | async" class="row gimme-space-top">
             <div class="col-12 mx-auto">
               <div class="date-options">
@@ -31,8 +33,7 @@
                   <hr>
               </div>
             </div>
-      </div>
-</div>
+      </div> -->
 
 
 

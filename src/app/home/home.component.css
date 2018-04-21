@@ -9,3 +9,22 @@
 .jumbotron {
     margin-bottom:0px;
 }
+
+.padding {
+    padding-top:40px;
+    padding-bottom: 40px;
+}
+
+.pad-sides {
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.gray-background {
+    background-color: lightgray;
+}
+
+.carousel-background {
+    background: lightgray;
+    border:none;
+}

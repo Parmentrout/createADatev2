@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SampleDateService } from '../sample-date.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   dates$: Observable<any>;
 
-  constructor(private sampleDateService: SampleDateService) { }
+  constructor(private sampleDateService: SampleDateService, private router: Router) { }
 
   ngOnInit() {
    this.dates$ = this.sampleDateService.getSampleDates().map(result => {
@@ -27,4 +28,7 @@ export class HomeComponent implements OnInit {
   });
   }
 
+  goToSampleDate(dateId: string) {
+    this.router.navigate([`/my-date/date/${dateId}/EGpGpztEstbO8OxpDrJ2TxkXyhY2`]);
+  }
 }

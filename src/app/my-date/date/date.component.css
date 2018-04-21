@@ -1,3 +1,20 @@
 a {
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 600px) {
+    .img {
+        max-width: 80px;
+    }
+}
+
+.container-fluid {
+    padding-right: 0px; 
+    padding-left: 0px;
+}
+
+.transparent-button {
+    background: transparent;
+    border: none;
+}

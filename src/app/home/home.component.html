@@ -1,4 +1,4 @@
-  <div class="jumbotron">
+  <div class="jumbotron padding">
     <h1 class="display-3 title-display">create a date</h1>
     <p class="lead text-center">where will your next date take you?</p>
   </div>
@@ -13,20 +13,18 @@
             </p>
        </div>
 </div>
-<div class="container-fluid">
-        <div class="text-center">
-             <h3>sample dates</h3>
-             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                    <div *ngFor="let item of dates$ | async" [ngClass]="item.class">
-                        <div class="jumbotron bg-white">
-                            <h1 class="display-3 title-display">{{item.dateName}}</h1>
-                            <p class="lead text-center">{{item.description}}</p>
+<div class="container-fluid gray-background">
+        <div class="text-center padding">
+             <!-- <h3>sample dates</h3> -->
+             <div id="carouselExampleIndicators" class="carousel slide gimme-space-bottom" data-ride="carousel">
+                    <div class="carousel-inner gimme-space-top">
+                        <div *ngFor="let item of dates$ | async" [ngClass]="item.class">
+                            <div class="pad-sides">
+                                <button class="carousel-background" (click)="goToSampleDate(item.dateId)">
+                                    <h3 class="display-4 title-display">{{item.dateName}}</h3>
+                                    <p class="lead text-center">{{item.description}}</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -37,9 +35,8 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="sr-only">Next</span>
                     </a>
-                  </div>
-        </div>
- </div>
+            </div>
+    </div>
 
 <!-- <div class="container-fluid">
     <div>
