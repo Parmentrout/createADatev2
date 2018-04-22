@@ -15,7 +15,7 @@
 <hr>
 <div *ngFor="let part of date?.dateOptions" class="gimme-space-top" >
   <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
               <h5 [innerHtml]="part.option1?.label"></h5>
               <div [innerHtml]="part.option1?.name"></div>
               <div [innerHtml]="part.option1?.address"></div>
@@ -23,7 +23,7 @@
         <div class="col-sm-2">
           <div class="text-center or-text"><strong>Or...</strong></div>
         </div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
           <h5 [innerHtml]="part.option2?.label"></h5>
           <div [innerHtml]="part.option2?.name"></div>
           <div [innerHtml]="part.option2?.address"></div>
@@ -37,6 +37,25 @@
     <span>
         <a class="btn btn-primary btn-lg ml-2" href="/build/start-build/{{date.dateId}}">Edit My Date</a>
     </span>
+  </div>
+</div>
+<div class="row gimme-space-top">
+    <div class="col-sm-4">
+      <form #emailForm="ngForm">
+      <div class="form-group">
+          <label class="control-label"><strong>Send this date to someone special</strong></label>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input [(ngModel)]="email" required type="email" name="email" class="form-control" placeholder="jsnow@aol.com" aria-label="Email Entry">
+              <div class="input-group-append">
+                  <span>
+                      <button type="submit" class="btn btn-primary"  [disabled]="!emailForm.form.valid" (click)="sendEmail()">Send</button>
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
   </div>
 </div>
 </div>

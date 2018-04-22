@@ -15,6 +15,7 @@ export class DateSummaryComponent implements OnInit {
 
   date: MyDate = new MyDate();
   userId: string = '';
+  email: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
     private _userService: UserService,
@@ -36,6 +37,10 @@ export class DateSummaryComponent implements OnInit {
           });
       });
     });
+  }
+
+  sendEmail() {
+    
   }
 
   private setDate(date: any) {

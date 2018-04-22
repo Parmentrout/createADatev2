@@ -31,7 +31,7 @@ export class WelcomeBuilderComponent implements OnInit {
   }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
  }
 
  startBuild() {
